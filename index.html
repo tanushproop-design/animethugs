@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Register Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #87CEEB, #E0F6FF); /* Sky blue gradient */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 300px;
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        input[type="text"], input[type="password"], input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .link {
+            color: #007BFF;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Login Form -->
+        <div id="loginForm">
+            <h2>Login</h2>
+            <input type="text" id="loginUsername" placeholder="Username" required>
+            <input type="password" id="loginPassword" placeholder="Password" required>
+            <button onclick="login()">Login</button>
+            <p><span class="link" onclick="showRegister()">Don't have an account? Register</span></p>
+            <p><span class="link" onclick="showForget()">Forgot Password?</span></p>
+            <div id="loginError" class="error"></div>
+        </div>
+
+        <!-- Register Form -->
+        <div id="registerForm" class="hidden">
+            <h2>Register</h2>
+            <input type="text" id="regUsername" placeholder="Username" required>
+            <input type="email" id="regEmail" placeholder="Email" required>
+            <input type="password" id="regPassword" placeholder="Password" required>
+            <button onclick="register()">Register</button>
+            <p><span class="link" onclick="showLogin()">Already have an account? Login</span></p>
+            <div id="regError" class="error"></div>
+        </div>
+
+        <!-- Forget Password Form -->
+        <div id="forgetForm" class="hidden">
+            <h2>Forgot Password</h2>
+            <input type="email" id="forgetEmail" placeholder="Enter your email" required>
+            <button onclick="sendOTP()">Send OTP</button>
+            <input type="text" id="otpInput" placeholder="Enter OTP" class="hidden" required>
+            <input type="password" id="newPassword" placeholder="New Password" class="hidden" required>
+            <button onclick="resetPassword()" class="hidden">Reset Password</button>
+            <p><span class="link" onclick="showLogin()">Back to Login</span></p>
+            <div id="forgetError" class="error"></div>
+        </div>
+    </div>
+
+    <script>
+        let generatedOTP = '';
+
+        function showLogin() {
+            document.getElementById('loginForm').classList.remove('hidden');
+            document.getElementById('registerForm').classList.add('hidden');
+            document.getElementById('forgetForm').classList.add('hidden');
+        }
+
+        function showRegister() {
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('registerForm').classList.remove('hidden');
+            document.getElementById('forgetForm').classList.add('hidden');
+        }
+
+        function showForget() {
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('registerForm').classList.add('hidden');
+            document.getElementById('forgetForm').classList.remove('hidden');
+        }
+
+        function login() {
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            const errorDiv = document.getElementById('loginError');
+
+            // Simple check (real mein backend se verify karo)
+            if (username === 'admin' && password === 'password') {
+                alert('Login successful!');
+                // Redirect to new page (dashboard.html) – domain assume karo GitHub pages, jaise https://yourusername.github.io/repo/dashboard.html
+                window.location.href = 'dashboard.html'; // Tum yeh file banao ya link update karo
+            } else {
+                errorDiv.textContent = 'Invalid username or password.';
+            }
+        }
+
+        function register() {
+            const username = document.getElementById('regUsername').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+            const errorDiv = document.getElementById('regError');
+
+            if (username && email && password) {
+                alert('Registration successful! Now login.');
+                showLogin();
+            } else {
+                errorDiv.textContent = 'Please fill all fields.';
+            }
+        }
+
+        function sendOTP() {
+            const email = document.getElementById('forgetEmail').value;
+            if (email) {
+                generatedOTP = Math.floor(100000 + Math.random() * 900000).toString(); // Random 6-digit OTP
+                alert(`OTP sent to ${email}: ${generatedOTP}`); // Demo – real mein email bhejo
+                document.getElementById('otpInput').classList.remove('hidden');
+                document.getElementById('newPassword').classList.remove('hidden');
+                document.getElementById('forgetForm').querySelector('button:last-of-type').classList.remove('hidden');
+            } else {
+                document.getElementById('forgetError').textContent = 'Enter email first.';
+            }
+        }
+
+        function resetPassword() {
+            const otp = document.getElementById('otpInput').value;
+            const newPass = document.getElementById('newPassword').value;
+            const errorDiv = document.getElementById('forgetError');
+
+            if (otp === generatedOTP && newPass) {
+                alert('Password reset successful! Login with new password.');
+                showLogin();
+            } else {
+                errorDiv.textContent = 'Invalid OTP or password.';
+            }
+        }
+    </script>
+</body>
+</html>
