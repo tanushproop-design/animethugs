@@ -136,55 +136,154 @@ footer{padding:40px 20px;text-align:center;color:var(--muted)}
 
 #adult-magazine { display: none; }
 
-/* MOBILE OPTIMIZATIONS */
+/* ============================
+   MOBILE OPTIMIZATIONS (FINAL FINAL)
+   ============================ */
+
 @media (max-width: 900px) {
   .hero-grid { grid-template-columns: 1fr; }
   .hero-gif { display: none; }
 }
 
+/* TABLET & PHONE */
 @media (max-width: 768px) {
-  header { top: 8px; }
-  .liquid-nav { padding: 6px; gap: 4px; }
-  .nav-item { padding: 8px 16px; font-size: 13px; }
-  .nav-right { gap: 4px; }
-  .btn-primary-ui, .btn-secondary-ui { padding: 6px 10px; font-size: 13px; }
-  #profilePicNav { width: 36px; height: 36px; }
-  section { padding: 80px 15px; }
+
+  /* HEADER */
+  header {
+    top: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* NAV BAR */
+  .liquid-nav {
+    padding: 6px 8px;
+    gap: 6px;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    position: relative;
+  }
+
+  .nav-item {
+    padding: 6px 12px;
+    font-size: 12.5px;
+    min-height: 36px;
+  }
+
+  /* DEFAULT: NAV-RIGHT BELOW (LOGGED OUT) */
+  .nav-right {
+    position: static;
+    transform: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 4px;
+  }
+
+  /* LOGIN / CREATE — BELOW NAV */
+  #loginBtn {
+    padding: 6px 16px;
+    font-size: 13px;
+    min-height: 36px;
+    border-radius: 18px;
+    white-space: nowrap;
+  }
+
+  /* LOGGED IN STATE — PROFILE PIC ON RIGHT */
+  #profilePicNav {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    padding: 0;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  /* CONTENT */
+  section { padding: 72px 14px; }
   .wrap { max-width: 100%; }
-  .hero-card { padding: 20px; }
-  .site-title { font-size: 32px; }
+  .hero-card { padding: 18px; }
+  .site-title { font-size: 30px; }
   .watch-box { padding: 14px; }
-  .panel { padding: 24px; }
-  .modal { width: calc(100% - 32px); padding: 18px; }
-  .modal h2 { font-size: 18px; }
-  .auth-actions { flex-direction: column; gap: 10px; }
-  .auth-actions .btn { min-width: 100%; }
-  .profile-modal { max-width: 90vw; width: 90vw; top: 10px; right: 10px; left: auto; }
+  .panel { padding: 22px; }
+
+  /* MODALS */
+  .modal {
+    width: calc(100% - 28px);
+    padding: 16px;
+  }
+
+  .modal h2 { font-size: 17px; }
+
+  .auth-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .auth-actions .btn {
+    min-width: 100%;
+  }
+
+  .profile-modal {
+    max-width: 90vw;
+    width: 90vw;
+    top: 10px;
+    right: 10px;
+    left: auto;
+  }
 }
 
+/* SMALL PHONES */
 @media (max-width: 480px) {
-  .liquid-nav { padding: 4px; border-radius: 24px; }
-  .nav-item { padding: 6px 12px; font-size: 12px; }
-  .site-title { font-size: 28px; }
-  .headline { font-size: 14px; }
-  .watch-box p { font-size: 14px; }
-  .btn-primary { padding: 8px 14px; font-size: 14px; }
+
+  .liquid-nav {
+    padding: 4px 6px;
+    border-radius: 22px;
+  }
+
+  .nav-item {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+
+  .site-title { font-size: 26px; }
+  .headline { font-size: 13px; }
+  .watch-box p { font-size: 13px; }
+
+  .btn-primary {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+
   .panel { padding: 18px; }
-  section { padding: 60px 10px; }
-  .modal { padding: 16px; }
-  .modal h2 { font-size: 16px; }
-  .modal p { font-size: 14px; }
-  footer { padding: 20px 10px; }
-  .profile-modal { max-width: 95vw; width: 95vw; top: 5px; right: 5px; }
+  section { padding: 56px 10px; }
+
+  .modal { padding: 14px; }
+  .modal h2 { font-size: 15px; }
+  .modal p { font-size: 13px; }
+
+  footer { padding: 18px 10px; }
 }
 
 /* TOUCH-FRIENDLY */
-.nav-item, .btn-primary-ui, .btn-secondary-ui, .btn-yes, .btn-no, #profilePicNav {
-  min-height: 44px;
+.nav-item,
+#loginBtn,
+#profilePicNav {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
+
+
 </style>
 </head>
 <body>
